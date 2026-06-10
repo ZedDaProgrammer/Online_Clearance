@@ -8,13 +8,11 @@
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">
       Student Clearance Portal
     </div>
     <div class="profile-area">
-      <!-- Displays logged-in student ID number -->
       <button class="profile-trigger" id="profileTrigger">
         Loading...
       </button>
@@ -25,16 +23,13 @@
     </div>
   </nav>
 
-  <!-- Main Content Layout -->
   <main class="dashboard-container">
     
-    <!-- Welcome Header -->
     <header class="dashboard-header">
       <h1>Clearance Dashboard</h1>
       <p>Welcome back, Student ID: <strong id="studentIdDisplay">Loading...</strong> (Section: <strong id="studentSectionDisplay">Loading...</strong>). Review your approval states below.</p>
     </header>
 
-    <!-- Clearance Completion Progress Bar -->
     <section class="progress-section">
       <div class="progress-info">
         <span>Completion Progress</span>
@@ -45,28 +40,23 @@
       </div>
     </section>
 
-    <!-- Summary Stats Cards -->
     <section class="stats-grid">
-      <!-- Total Pending Signatures Card -->
       <div class="stat-card pending">
         <span class="stat-title">Pending Signatures</span>
         <span class="stat-number" id="statsPending">0</span>
       </div>
 
-      <!-- Signed Subjects Card -->
       <div class="stat-card signed">
         <span class="stat-title">Signed Subjects</span>
         <span class="stat-number" id="statsSigned">0</span>
       </div>
 
-      <!-- Total Term Subjects Card -->
       <div class="stat-card total">
         <span class="stat-title">Total Term Subjects</span>
         <span class="stat-number" id="statsTotal">0</span>
       </div>
     </section>
 
-    <!-- Search & Filter Controls -->
     <section class="controls-section">
       <div class="search-box">
         <input type="text" id="searchInput" class="search-input" placeholder="Search by subject code, name, or professor...">
@@ -78,26 +68,22 @@
       </div>
     </section>
 
-    <!-- Main Clearance Subjects Table -->
     <section class="table-container">
       <table id="subjectsTable">
         <thead>
           <tr>
-            <th>Subject Code</th>
-            <th>Subject Name</th>
+            <th>Subject</th>
             <th>Professor Name</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody id="subjectsTableBody">
-          <!-- Dynamically rendered rows will appear here -->
         </tbody>
       </table>
     </section>
 
   </main>
 
-  <!-- Dashboard Script -->
   <script src="dashboard.js"></script>
 </body>
 </html>

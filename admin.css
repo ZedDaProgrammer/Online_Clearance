@@ -1,8 +1,8 @@
-/* Admin Dashboard Style Sheet - Clean & Modern Slate theme */
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #0f172a; /* Slate 900 */
+  --primary-color: #0f172a; 
   --primary-hover: #334155;
   --bg-color: #f8fafc;
   --card-bg: #ffffff;
@@ -10,13 +10,13 @@
   --text-muted: #64748b;
   --border-color: #f1f5f9;
   
-  /* Status Badges */
+  
   --success-bg: #f0fdf4;
   --success-text: #166534;
   --warning-bg: #fffbeb;
   --warning-text: #92400e;
   
-  /* Border & Shadows */
+  
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --radius-sm: 6px;
@@ -39,7 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Navbar */
+
 .navbar {
   background-color: var(--card-bg);
   border-bottom: 1px solid var(--border-color);
@@ -60,7 +60,7 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* User Profile */
+
 .profile-area {
   position: relative;
 }
@@ -161,7 +161,7 @@ body {
   background-color: #fef2f2;
 }
 
-/* Dashboard Container */
+
 .dashboard-container {
   max-width: 1000px;
   margin: 1.5rem auto;
@@ -185,7 +185,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Stats cards */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -229,7 +229,7 @@ body {
 .stat-card.signed { border-left: 3px solid #16a34a; }
 .stat-card.total { border-left: 3px solid var(--primary-color); }
 
-/* Controls Section */
+
 .controls-section {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -296,7 +296,7 @@ body {
   color: #ffffff;
 }
 
-/* Tables */
+
 .table-container {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -375,7 +375,7 @@ tr:hover td {
   color: var(--warning-text);
 }
 
-/* Dynamic Signature Action Button */
+
 .btn-action {
   background-color: transparent;
   border: 1px solid var(--primary-color);
@@ -394,7 +394,7 @@ tr:hover td {
   color: #ffffff;
 }
 
-/* Empty State */
+
 .empty-state {
   text-align: center;
   padding: 3rem 1.5rem;
@@ -407,8 +407,8 @@ tr:hover td {
   margin-bottom: 0.15rem;
 }
 
-/* Mobile responsive */
-/* Split Layout Workspace */
+
+
 .admin-workspace {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -520,7 +520,7 @@ tr:hover td {
   color: var(--primary-color);
 }
 
-/* Mobile responsive and collapses */
+
 @media (max-width: 768px) {
   .admin-workspace {
     grid-template-columns: 1fr;

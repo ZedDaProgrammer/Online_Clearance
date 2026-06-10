@@ -1,15 +1,15 @@
-// --- Authentication Security Check ---
+
 const studentId = localStorage.getItem("studentId");
 if (!studentId) {
-  // Direct unauthorized users back to the login page
+  
   window.location.href = "index.html";
 }
 
-// Display Student Information
+
 document.getElementById("profileTrigger").textContent = studentId;
 document.getElementById("studentIdDisplay").textContent = studentId;
 
-// --- Dropdown Navigation Logic ---
+
 const profileTrigger = document.getElementById("profileTrigger");
 const profileDropdown = document.getElementById("profileDropdown");
 const logoutBtn = document.getElementById("logoutBtn");
@@ -27,7 +27,7 @@ window.addEventListener("click", () => {
   }
 });
 
-// Logs out the user by clearing the session from localStorage
+
 logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("studentId");
   localStorage.removeItem("userRole");
@@ -35,9 +35,9 @@ logoutBtn.addEventListener("click", () => {
 });
 
 
-// --- State Management ---
+
 const defaultClearanceRecords = [
-  // Section BSIT 2-1
+  
   { studentId: "202410351", section: "BSIT 2-1", code: "DCIT50", name: "OBJECT ORIENTED PROGRAMMING", professor: "Prof. Arthur Pendragon", status: "Signed" },
   { studentId: "202410351", section: "BSIT 2-1", code: "DCIT24", name: "INFORMATION MANAGEMENT", professor: "Dr. Evelyn Martinez", status: "Available to be Signed" },
   { studentId: "202410351", section: "BSIT 2-1", code: "ITEC55A", name: "PLATFORM TECHNOLOGIES", professor: "Dr. Sophia Carter", status: "Available to be Signed" },
@@ -46,7 +46,7 @@ const defaultClearanceRecords = [
   { studentId: "202410402", section: "BSIT 2-1", code: "DCIT24", name: "INFORMATION MANAGEMENT", professor: "Dr. Evelyn Martinez", status: "Signed" },
   { studentId: "202410402", section: "BSIT 2-1", code: "ITEC55A", name: "PLATFORM TECHNOLOGIES", professor: "Dr. Sophia Carter", status: "Available to be Signed" },
 
-  // Section BSIT 2-2
+  
   { studentId: "202410501", section: "BSIT 2-2", code: "DCIT50", name: "OBJECT ORIENTED PROGRAMMING", professor: "Prof. Arthur Pendragon", status: "Available to be Signed" },
   { studentId: "202410501", section: "BSIT 2-2", code: "DCIT24", name: "INFORMATION MANAGEMENT", professor: "Dr. Evelyn Martinez", status: "Signed" },
   { studentId: "202410501", section: "BSIT 2-2", code: "ITEC55A", name: "PLATFORM TECHNOLOGIES", professor: "Dr. Sophia Carter", status: "Available to be Signed" },
@@ -55,7 +55,7 @@ const defaultClearanceRecords = [
   { studentId: "202410602", section: "BSIT 2-2", code: "DCIT24", name: "INFORMATION MANAGEMENT", professor: "Dr. Evelyn Martinez", status: "Available to be Signed" },
   { studentId: "202410602", section: "BSIT 2-2", code: "ITEC55A", name: "PLATFORM TECHNOLOGIES", professor: "Dr. Sophia Carter", status: "Signed" },
 
-  // Section BSIT 2-3
+  
   { studentId: "202410703", section: "BSIT 2-3", code: "DCIT50", name: "OBJECT ORIENTED PROGRAMMING", professor: "Prof. Arthur Pendragon", status: "Available to be Signed" },
   { studentId: "202410703", section: "BSIT 2-3", code: "DCIT24", name: "INFORMATION MANAGEMENT", professor: "Dr. Evelyn Martinez", status: "Available to be Signed" },
   { studentId: "202410703", section: "BSIT 2-3", code: "ITEC55A", name: "PLATFORM TECHNOLOGIES", professor: "Dr. Sophia Carter", status: "Signed" }
@@ -68,7 +68,8 @@ let needsReseed = false;
 if (existing) {
   try {
     const parsed = JSON.parse(existing);
-    if (parsed.length === 0 || !parsed[0].hasOwnProperty("section") || parsed[0].section === "CS-3A" || parsed[0].code !== "DCIT50") {
+    const hasInvalid = parsed.some(r => r.code !== "DCIT50" && r.code !== "DCIT24" && r.code !== "ITEC55A");
+    if (parsed.length === 0 || !parsed[0].hasOwnProperty("section") || parsed[0].section === "CS-3A" || hasInvalid) {
       needsReseed = true;
     } else {
       records = parsed;
@@ -85,10 +86,10 @@ if (needsReseed) {
   records = defaultClearanceRecords;
 }
 
-// Filter records specifically belonging to the active student ID
+
 const studentRecords = records.filter(r => r.studentId === studentId);
 
-// Display Student Section
+
 const studentSection = studentRecords.length > 0 ? studentRecords[0].section : "N/A";
 document.getElementById("studentSectionDisplay").textContent = studentSection;
 
@@ -96,9 +97,9 @@ const tableBody = document.getElementById("subjectsTableBody");
 const searchInput = document.getElementById("searchInput");
 const filterButtons = document.querySelectorAll(".btn-filter");
 
-let currentFilter = "all"; // Options: "all", "signed", "pending"
+let currentFilter = "all"; 
 
-// Recomputes statistics based on current student's data and updates the progress bar
+
 function updateStats() {
   let pendingCount = 0;
   let signedCount = 0;
@@ -115,21 +116,21 @@ function updateStats() {
   document.getElementById("statsSigned").textContent = signedCount;
   document.getElementById("statsTotal").textContent = studentRecords.length;
 
-  // Calculate and update visual completion progress
+  
   const total = studentRecords.length;
   const percentage = total > 0 ? Math.round((signedCount / total) * 100) : 0;
   document.getElementById("progressPercent").textContent = `${percentage}%`;
   document.getElementById("progressBarFill").style.width = `${percentage}%`;
 }
 
-// Renders the student's table rows dynamically
+
 function renderTable(dataList) {
   tableBody.innerHTML = "";
 
   if (dataList.length === 0) {
     tableBody.innerHTML = `
       <tr>
-        <td colspan="4" class="empty-state">
+        <td colspan="3" class="empty-state">
           <div class="empty-title">No clearances found</div>
           <p>No records match your filters or search terms.</p>
         </td>
@@ -144,8 +145,12 @@ function renderTable(dataList) {
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><strong>${record.code}</strong></td>
-      <td>${record.name}</td>
+      <td>
+        <div class="subject-info">
+          <span class="subject-code">${record.code}</span>
+          <span class="subject-name">${record.name}</span>
+        </div>
+      </td>
       <td>${record.professor}</td>
       <td>
         <span class="${badgeClass}">
@@ -157,18 +162,18 @@ function renderTable(dataList) {
   });
 }
 
-// Logic for combining text search and category toggles
+
 function filterAndRender() {
   const query = searchInput.value.toLowerCase().trim();
 
   const filtered = studentRecords.filter((record) => {
-    // 1. Text Search matches code, name, or professor
+    
     const matchesSearch = 
       record.code.toLowerCase().includes(query) ||
       record.name.toLowerCase().includes(query) ||
       record.professor.toLowerCase().includes(query);
 
-    // 2. Tab Filter Category matches
+    
     let matchesCategory = true;
     if (currentFilter === "signed") {
       matchesCategory = (record.status === "Signed");
@@ -183,7 +188,7 @@ function filterAndRender() {
 }
 
 
-// --- Event Listeners for Filters ---
+
 searchInput.addEventListener("input", filterAndRender);
 
 filterButtons.forEach((btn) => {
@@ -196,6 +201,6 @@ filterButtons.forEach((btn) => {
 });
 
 
-// --- Initial Run ---
+
 updateStats();
 renderTable(studentRecords);
