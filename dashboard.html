@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Clearance Portal</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      Student Clearance Portal
+    </div>
+    <div class="profile-area">
+      <!-- Displays logged-in student ID number -->
+      <button class="profile-trigger" id="profileTrigger">
+        Loading...
+      </button>
+      <div class="dropdown-menu" id="profileDropdown">
+        <button class="dropdown-item" onclick="alert('Account Settings clicked!')">Account Settings</button>
+        <button class="dropdown-item danger-text" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="dashboard-container">
+    
+    <!-- Welcome Header -->
+    <header class="dashboard-header">
+      <h1>Clearance Dashboard</h1>
+      <p>Welcome back, Student ID: <strong id="studentIdDisplay">Loading...</strong> (Section: <strong id="studentSectionDisplay">Loading...</strong>). Review your approval states below.</p>
+    </header>
+
+    <!-- Clearance Completion Progress Bar -->
+    <section class="progress-section">
+      <div class="progress-info">
+        <span>Completion Progress</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+      </div>
+    </section>
+
+    <!-- Summary Stats Cards -->
+    <section class="stats-grid">
+      <!-- Total Pending Signatures Card -->
+      <div class="stat-card pending">
+        <span class="stat-title">Pending Signatures</span>
+        <span class="stat-number" id="statsPending">0</span>
+      </div>
+
+      <!-- Signed Subjects Card -->
+      <div class="stat-card signed">
+        <span class="stat-title">Signed Subjects</span>
+        <span class="stat-number" id="statsSigned">0</span>
+      </div>
+
+      <!-- Total Term Subjects Card -->
+      <div class="stat-card total">
+        <span class="stat-title">Total Term Subjects</span>
+        <span class="stat-number" id="statsTotal">0</span>
+      </div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="controls-section">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by subject code, name, or professor...">
+      </div>
+      <div class="filter-buttons">
+        <button class="btn-filter active" data-filter="all">All</button>
+        <button class="btn-filter" data-filter="signed">Signed</button>
+        <button class="btn-filter" data-filter="pending">Pending</button>
+      </div>
+    </section>
+
+    <!-- Main Clearance Subjects Table -->
+    <section class="table-container">
+      <table id="subjectsTable">
+        <thead>
+          <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Professor Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="subjectsTableBody">
+          <!-- Dynamically rendered rows will appear here -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- Dashboard Script -->
+  <script src="dashboard.js"></script>
+</body>
+</html>

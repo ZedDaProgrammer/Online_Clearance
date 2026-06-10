@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Clearance Portal</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      Admin Portal
+    </div>
+    <div class="profile-area">
+      <button class="profile-trigger" id="profileTrigger">
+        Admin Profile
+      </button>
+      <div class="dropdown-menu" id="profileDropdown">
+        <button class="dropdown-item" onclick="alert('Account Settings clicked!')">Account Settings</button>
+        <button class="dropdown-item danger-text" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="dashboard-container">
+    
+    <!-- Welcome Header -->
+    <header class="dashboard-header">
+      <h1>Clearance Management</h1>
+      <p>Welcome back, <strong>Professor Admin</strong>. Review, manage, and sign student academic clearance requests.</p>
+    </header>
+
+    <!-- Admin Metric Summary Cards -->
+    <section class="stats-grid">
+      <!-- Total Pending Requests -->
+      <div class="stat-card pending">
+        <span class="stat-title">Pending Approvals</span>
+        <span class="stat-number" id="statsPending">0</span>
+      </div>
+
+      <!-- Total Approved -->
+      <div class="stat-card signed">
+        <span class="stat-title">Signed Clearances</span>
+        <span class="stat-number" id="statsSigned">0</span>
+      </div>
+
+      <!-- Total Requests -->
+      <div class="stat-card total">
+        <span class="stat-title">Total Requests</span>
+        <span class="stat-number" id="statsTotal">0</span>
+      </div>
+    </section>
+
+    <!-- Main Workspace Split Layout -->
+    <div class="admin-workspace">
+      <!-- Left Sidebar: Section Selector & Students List -->
+      <aside class="students-sidebar">
+        <h2>Section</h2>
+        <select id="sectionSelect" class="section-select">
+          <option value="">Choose Section</option>
+          <!-- Options dynamically loaded -->
+        </select>
+
+        <h2 style="margin-top: 1.25rem;">Students</h2>
+        <div class="students-list-group" id="studentsListGroup">
+          <!-- Student numbers belonging to chosen section dynamically loaded -->
+        </div>
+      </aside>
+
+      <!-- Right Panel: Clearance Request Details -->
+      <section class="details-section">
+        <!-- Selected Student Greeting Header -->
+        <h2 id="selectedStudentTitle">Select a student</h2>
+        
+        <!-- Controls & Table (Initially hidden until a student is selected) -->
+        <div id="studentWorkspace" style="display: none;">
+          <section class="controls-section">
+            <div class="search-box">
+              <input type="text" id="searchInput" class="search-input" placeholder="Search by subject code, name, or status...">
+            </div>
+            <div class="filter-buttons">
+              <button class="btn-filter active" data-filter="all">All</button>
+              <button class="btn-filter" data-filter="signed">Signed</button>
+              <button class="btn-filter" data-filter="pending">Pending</button>
+            </div>
+          </section>
+
+          <section class="table-container">
+            <table id="requestsTable">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="requestsTableBody">
+                <!-- Dynamically populated student requests go here -->
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <!-- Placeholder when no student is active -->
+        <div id="noStudentPlaceholder" class="no-student-placeholder">
+          Select a student from the list on the left to view, manage, and sign off on their pending academic clearances.
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Admin Interactive Script -->
+  <script src="admin.js"></script>
+</body>
+</html>
